@@ -1,11 +1,6 @@
-# Multi-Webhook-Spam
-
-A webhook spammer that supports multiple webhooks at once!
-
-### Step 1: Add Webhooks
-- Create a `webhooks.txt` file and add your webhooks (ONE PER LINE).
-
-### Step 2: Open `start.bat`
-- Installs the required packages and starts `spam.py`.
-
-- https://discord.gg/exposing
+# INSTALLATION
+- Download the project and extract
+- Download Python 3.11.x (or any other stable versions)
+- Put your webhook/webhooks in `webhooks.txt`
+- Run `start.bat`
+- Enjoy using!
