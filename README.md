@@ -2,7 +2,7 @@
 
 A webhook spammer that supports multiple webhooks at once!
 
-### Step 3: Add Webhooks
+### Step 1: Add Webhooks
 - Create a `webhooks.txt` file and add your webhooks (ONE PER LINE).
 
 ### Step 2: Open `start.bat`
