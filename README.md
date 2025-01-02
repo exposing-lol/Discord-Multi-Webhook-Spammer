@@ -7,3 +7,5 @@ A webhook spammer that supports multiple webhooks at once!
 
 ### Step 2: Open `start.bat`
 - Installs the required packages and starts `spam.py`.
+
+- https://discord.gg/exposing
