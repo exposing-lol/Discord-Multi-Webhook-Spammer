@@ -57,7 +57,6 @@ def spam():
                     ughratelimits = exposing.headers.get("Retry-After")
                     if ughratelimits:
                         wait = int(ughratelimits) / 1000  
-                        print(wait)  
                         log('RATELIMIT', f'Retrying in {wait} seconds!', exposing.status_code) 
                         time.sleep(wait)  
                 else:
