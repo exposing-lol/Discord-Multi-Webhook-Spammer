@@ -2,6 +2,7 @@ import os
 import time
 import requests
 from colorama import Fore
+from datetime import datetime
 
 from modules.logs1 import *
 from modules.helper import *  
@@ -53,11 +54,19 @@ def spam():
                 if exposing.status_code // 100 == 2:
                     log('SUCCESS', f'{user} sent message successfully!', exposing.status_code) 
                 elif exposing.status_code == 429:
-                    ughratelimits = int(exposing.headers.get('ughratelimits', 1)) / 1000
-                    log('RATELIMIT', f'Retrying in {ughratelimits} seconds!', exposing.status_code) 
-                    time.sleep(ughratelimits)
+                    retry_after = r.headers.get("Retry-After")
+                    if retry_after:
+                        wait_time = int(retry_after) / 1000
+                        print(wait_time) # unnecessary !!
+                        log('RATELIMIT', f'Retrying in {ughratelimits} seconds!', exposing.status_code) 
+                        time.sleep(ughratelimits)
                 else:
-                    log('ERROR', f'{user} message not sent!', exposing.status_code)
+                    reset_timestamp = int(r.headers.get("X-RateLimit-Reset", 0))
+                    reset_time = datetime.utcfromtimestamp(reset_timestamp)
+                    current_time = datetime.utcnow()
+                    wait_time = (reset_time - current_time).total_seconds()
+                    time.sleep(wait_time)
+
                 time.sleep(delay)
         except KeyboardInterrupt:
             log('ERROR', 'Closing!')
