@@ -1,8 +1,9 @@
 import os
 import time
 import requests
-from colorama import Fore
 from datetime import datetime
+from colorama import Fore, init
+init()
 
 from modules.logs1 import *
 from modules.helper import *  
