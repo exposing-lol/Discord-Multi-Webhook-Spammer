@@ -54,19 +54,18 @@ def spam():
                 if exposing.status_code // 100 == 2:
                     log('SUCCESS', f'{user} sent message successfully!', exposing.status_code) 
                 elif exposing.status_code == 429:
-                    retry_after = r.headers.get("Retry-After")
-                    if retry_after:
-                        wait_time = int(retry_after) / 1000
-                        print(wait_time) # unnecessary !!
+                    retry = r.headers.get("Retry-After")
+                    if retry:
+                        wait = int(retry) / 1000
+                        print(wait) # unnecessary !!
                         log('RATELIMIT', f'Retrying in {ughratelimits} seconds!', exposing.status_code) 
                         time.sleep(ughratelimits)
                 else:
-                    reset_timestamp = int(r.headers.get("X-RateLimit-Reset", 0))
-                    reset_time = datetime.utcfromtimestamp(reset_timestamp)
-                    current_time = datetime.utcnow()
-                    wait_time = (reset_time - current_time).total_seconds()
-                    time.sleep(wait_time)
-
+                    reset = int(r.headers.get("X-RateLimit-Reset", 0))
+                    resett = datetime.utcfromtimestamp(reset)
+                    currentt = datetime.utcnow()
+                    wt = (resett - currentt).total_seconds()
+                    time.sleep(wt)
                 time.sleep(delay)
         except KeyboardInterrupt:
             log('ERROR', 'Closing!')
