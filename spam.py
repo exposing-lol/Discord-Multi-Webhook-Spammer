@@ -53,9 +53,9 @@ def spam():
                 if exposing.status_code // 100 == 2:
                     log('SUCCESS', f'{user} sent message successfully!', exposing.status_code) 
                 elif exposing.status_code == 429:
-                    ughratelimits = int(exposing.headers.get('ughratelimits', 1)) / 1000
-                    log('RATELIMIT', f'Retrying in {ughratelimits} seconds!', exposing.status_code) 
-                    time.sleep(ughratelimits)
+                    rl = int(exposing.headers.get('X-RateLimit-Reset', 1)) / 1000
+                    log('RATELIMIT', f'Retrying in {rl} seconds!', exposing.status_code) 
+                    time.sleep(rl)
                 else:
                     log('ERROR', f'{user} message not sent!', exposing.status_code)
                 time.sleep(delay)
